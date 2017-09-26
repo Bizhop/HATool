@@ -2,7 +2,6 @@ package fi.bizhop.hatool.html;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,19 +16,7 @@ public class Reader {
 	
 	private static final String playersUrl = "http://www.hockeyarena.net/fi/index.php?p=manager_team_players.php";
 
-	public static List<Player> readPlayers(String pastedCookie) throws Exception {
-		String[] cookiesArray = pastedCookie.split(";");
-		Map<String, String> cookies = new HashMap<String, String>();
-		for(String cookie : cookiesArray) {
-			String[] split = cookie.split("=");
-			if(split.length == 2) {
-				String key = split[0].trim();
-				String value = split[1].trim();
-				cookies.put(key, value);
-			}
-		}
-		
-		
+	public static List<Player> readPlayers(Map<String, String> cookies) throws Exception {
 		Document doc = Jsoup.connect(playersUrl)
 				.cookies(cookies)
 				.get();
