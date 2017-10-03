@@ -1,12 +1,12 @@
 \set ON_ERROR_STOP on
 
--- CREATE USER mt_admin PASSWORD 'xxxxxxxxx';
+--CREATE USER hatool PASSWORD 'hatool';
 
-CREATE DATABASE mediateko_core WITH OWNER=mt_admin
+CREATE DATABASE hatool WITH OWNER=hatool
     encoding   = 'UTF-8'
     LC_CTYPE   = 'en_US.UTF-8'
     LC_COLLATE = 'en_US.UTF-8'
     TEMPLATE template0;
-\c mediateko_core
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO mt_admin;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO mt_admin;
+\c hatool
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO hatool;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO hatool;
