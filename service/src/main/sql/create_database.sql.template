@@ -1,6 +1,6 @@
 \set ON_ERROR_STOP on
 
---CREATE USER hatool PASSWORD 'hatool';
+CREATE USER hatool PASSWORD 'hatool';
 
 CREATE DATABASE hatool WITH OWNER=hatool
     encoding   = 'UTF-8'

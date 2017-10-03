@@ -29,21 +29,21 @@ public class Reader {
 			Elements tds = row.select("td");
 			if(tds.size() == 16) {
 				players.add(new PlayerDto(clean(tds.get(0)),
-						getNumbers(tds.get(1)),
-						getNumbers(tds.get(2)),
-						getNumbers(tds.get(3)),
-						getNumbers(tds.get(4)),
-						getNumbers(tds.get(5)),
-						getNumbers(tds.get(6)),
-						getNumbers(tds.get(7)),
-						getNumbers(tds.get(8)),
-						getNumbers(tds.get(9)),
-						getNumbers(tds.get(10)),
-						getNumbers(tds.get(11)),
-						getNumbers(tds.get(12)),
-						getNumbers(tds.get(13)),
-						getNumbers(tds.get(14)),
-						getNumbers(tds.get(15))));
+						getNumber(tds.get(1)),
+						getNumber(tds.get(2)),
+						getNumber(tds.get(3)),
+						getNumber(tds.get(4)),
+						getNumber(tds.get(5)),
+						getNumber(tds.get(6)),
+						getNumber(tds.get(7)),
+						getNumber(tds.get(8)),
+						getNumber(tds.get(9)),
+						getNumber(tds.get(10)),
+						getNumber(tds.get(11)),
+						getNumber(tds.get(12)),
+						getNumber(tds.get(13)),
+						getNumber(tds.get(14)),
+						getNumber(tds.get(15))));
 			}
 		}
 
@@ -55,14 +55,13 @@ public class Reader {
 		return td.text().replace("\"A\"", "").replace("\"C\"", "").replaceAll("\\( [0-9]\\)", "").replace("\"", "").trim();
 	}
 	
-	private static String getNumbers(Element td) {
+	private static Integer getNumber(Element td) {
 		try {
-			Integer number = Integer.parseInt(td.text().replaceAll("[^\\d\\-]", ""));
-			return number.toString();
+			return Integer.parseInt(td.text().replaceAll("[^\\d\\-]", ""));
 		}
 		catch (NumberFormatException e) {
 			System.out.println(e);
-			return "";
+			return null;
 		}
 	}
 }

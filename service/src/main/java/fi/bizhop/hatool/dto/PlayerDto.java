@@ -5,26 +5,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "nimi", "ika", "lah", "pot", "mv", "puol", "hyokk", "lauk", "syo", "nop", "voim", "ihi", "knto", "kok", "ti", "viikko" })
 public class PlayerDto implements Comparable<PlayerDto> {
 	private String nimi;
-	private String ika;
-	private String lah;
-	private String pot;
-	private String mv;
-	private String puol;
-	private String hyokk;
-	private String lauk;
-	private String syo;
-	private String nop;
-	private String voim;
-	private String ihi;
-	private String knto;
-	private String kok;
-	private String ti;
-	private String viikko;
+	private Integer ika;
+	private Integer lah;
+	private Integer pot;
+	private Integer mv;
+	private Integer puol;
+	private Integer hyokk;
+	private Integer lauk;
+	private Integer syo;
+	private Integer nop;
+	private Integer voim;
+	private Integer ihi;
+	private Integer knto;
+	private Integer kok;
+	private Integer ti;
+	private Integer viikko;
 	
-	public PlayerDto(String nimi, String ika, String lah, String pot, String mv,
-			String puol, String hyokk, String lauk, String syo, String nop,
-			String voim, String ihi, String knto, String kok, String ti,
-			String viikko) {
+	public PlayerDto(String nimi, Integer ika, Integer lah, Integer pot, Integer mv,
+			Integer puol, Integer hyokk, Integer lauk, Integer syo, Integer nop,
+			Integer voim, Integer ihi, Integer knto, Integer kok, Integer ti,
+			Integer viikko) {
 		super();
 		this.nimi = nimi;
 		this.ika = ika;
@@ -52,123 +52,123 @@ public class PlayerDto implements Comparable<PlayerDto> {
 		this.nimi = nimi;
 	}
 
-	public String getIka() {
+	public Integer getIka() {
 		return ika;
 	}
 
-	public void setIka(String ika) {
+	public void setIka(Integer ika) {
 		this.ika = ika;
 	}
 
-	public String getLah() {
+	public Integer getLah() {
 		return lah;
 	}
 
-	public void setLah(String lah) {
+	public void setLah(Integer lah) {
 		this.lah = lah;
 	}
 
-	public String getPot() {
+	public Integer getPot() {
 		return pot;
 	}
 
-	public void setPot(String pot) {
+	public void setPot(Integer pot) {
 		this.pot = pot;
 	}
 
-	public String getMv() {
+	public Integer getMv() {
 		return mv;
 	}
 
-	public void setMv(String mv) {
+	public void setMv(Integer mv) {
 		this.mv = mv;
 	}
 
-	public String getPuol() {
+	public Integer getPuol() {
 		return puol;
 	}
 
-	public void setPuol(String puol) {
+	public void setPuol(Integer puol) {
 		this.puol = puol;
 	}
 
-	public String getHyokk() {
+	public Integer getHyokk() {
 		return hyokk;
 	}
 
-	public void setHyokk(String hyokk) {
+	public void setHyokk(Integer hyokk) {
 		this.hyokk = hyokk;
 	}
 
-	public String getLauk() {
+	public Integer getLauk() {
 		return lauk;
 	}
 
-	public void setLauk(String lauk) {
+	public void setLauk(Integer lauk) {
 		this.lauk = lauk;
 	}
 
-	public String getSyo() {
+	public Integer getSyo() {
 		return syo;
 	}
 
-	public void setSyo(String syo) {
+	public void setSyo(Integer syo) {
 		this.syo = syo;
 	}
 
-	public String getNop() {
+	public Integer getNop() {
 		return nop;
 	}
 
-	public void setNop(String nop) {
+	public void setNop(Integer nop) {
 		this.nop = nop;
 	}
 
-	public String getVoim() {
+	public Integer getVoim() {
 		return voim;
 	}
 
-	public void setVoim(String voim) {
+	public void setVoim(Integer voim) {
 		this.voim = voim;
 	}
 
-	public String getIhi() {
+	public Integer getIhi() {
 		return ihi;
 	}
 
-	public void setIhi(String ihi) {
+	public void setIhi(Integer ihi) {
 		this.ihi = ihi;
 	}
 
-	public String getKnto() {
+	public Integer getKnto() {
 		return knto;
 	}
 
-	public void setKnto(String knto) {
+	public void setKnto(Integer knto) {
 		this.knto = knto;
 	}
 
-	public String getKok() {
+	public Integer getKok() {
 		return kok;
 	}
 
-	public void setKok(String kok) {
+	public void setKok(Integer kok) {
 		this.kok = kok;
 	}
 
-	public String getTi() {
+	public Integer getTi() {
 		return ti;
 	}
 
-	public void setTi(String ti) {
+	public void setTi(Integer ti) {
 		this.ti = ti;
 	}
 
-	public String getViikko() {
+	public Integer getViikko() {
 		return viikko;
 	}
 
-	public void setViikko(String viikko) {
+	public void setViikko(Integer viikko) {
 		this.viikko = viikko;
 	}
 
