@@ -1,18 +1,18 @@
-package fi.bizhop.hatool.entity;
+package fi.bizhop.hatool.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "nimi", "ikä", "lah", "pot", "mv", "puol", "hyökk", "lauk", "syö", "nop", "voim", "ihi", "knto", "kok", "ti", "viikko" })
-public class Player implements Comparable<Player> {
+@JsonPropertyOrder({ "nimi", "ika", "lah", "pot", "mv", "puol", "hyokk", "lauk", "syo", "nop", "voim", "ihi", "knto", "kok", "ti", "viikko" })
+public class PlayerDto implements Comparable<PlayerDto> {
 	private String nimi;
-	private String ikä;
+	private String ika;
 	private String lah;
 	private String pot;
 	private String mv;
 	private String puol;
-	private String hyökk;
+	private String hyokk;
 	private String lauk;
-	private String syö;
+	private String syo;
 	private String nop;
 	private String voim;
 	private String ihi;
@@ -21,20 +21,20 @@ public class Player implements Comparable<Player> {
 	private String ti;
 	private String viikko;
 	
-	public Player(String nimi, String ikä, String lah, String pot, String mv,
-			String puol, String hyökk, String lauk, String syö, String nop,
+	public PlayerDto(String nimi, String ika, String lah, String pot, String mv,
+			String puol, String hyokk, String lauk, String syo, String nop,
 			String voim, String ihi, String knto, String kok, String ti,
 			String viikko) {
 		super();
 		this.nimi = nimi;
-		this.ikä = ikä;
+		this.ika = ika;
 		this.lah = lah;
 		this.pot = pot;
 		this.mv = mv;
 		this.puol = puol;
-		this.hyökk = hyökk;
+		this.hyokk = hyokk;
 		this.lauk = lauk;
-		this.syö = syö;
+		this.syo = syo;
 		this.nop = nop;
 		this.voim = voim;
 		this.ihi = ihi;
@@ -52,12 +52,12 @@ public class Player implements Comparable<Player> {
 		this.nimi = nimi;
 	}
 
-	public String getIkä() {
-		return ikä;
+	public String getIka() {
+		return ika;
 	}
 
-	public void setIkä(String ikä) {
-		this.ikä = ikä;
+	public void setIka(String ika) {
+		this.ika = ika;
 	}
 
 	public String getLah() {
@@ -92,12 +92,12 @@ public class Player implements Comparable<Player> {
 		this.puol = puol;
 	}
 
-	public String getHyökk() {
-		return hyökk;
+	public String getHyokk() {
+		return hyokk;
 	}
 
-	public void setHyökk(String hyökk) {
-		this.hyökk = hyökk;
+	public void setHyokk(String hyokk) {
+		this.hyokk = hyokk;
 	}
 
 	public String getLauk() {
@@ -108,12 +108,12 @@ public class Player implements Comparable<Player> {
 		this.lauk = lauk;
 	}
 
-	public String getSyö() {
-		return syö;
+	public String getSyo() {
+		return syo;
 	}
 
-	public void setSyö(String syö) {
-		this.syö = syö;
+	public void setSyo(String syo) {
+		this.syo = syo;
 	}
 
 	public String getNop() {
@@ -173,7 +173,7 @@ public class Player implements Comparable<Player> {
 	}
 
 	@Override
-	public int compareTo(Player o) {
+	public int compareTo(PlayerDto o) {
 		if(o == null) {
 			return 0;
 		}

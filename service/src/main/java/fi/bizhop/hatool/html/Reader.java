@@ -10,13 +10,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import fi.bizhop.hatool.entity.Player;
+import fi.bizhop.hatool.dto.PlayerDto;
 
 public class Reader {
 	
 	private static final String playersUrl = "http://www.hockeyarena.net/fi/index.php?p=manager_team_players.php";
 
-	public static List<Player> readPlayers(Map<String, String> cookies) throws Exception {
+	public static List<PlayerDto> readPlayers(Map<String, String> cookies) throws Exception {
 		Document doc = Jsoup.connect(playersUrl)
 				.cookies(cookies)
 				.get();
@@ -24,11 +24,11 @@ public class Reader {
 		Element table = doc.getElementById("table-2");
 		Elements rows = table.select("tbody").select("tr");
 		
-		List<Player> players = new ArrayList<Player>();
+		List<PlayerDto> players = new ArrayList<PlayerDto>();
 		for(Element row : rows) {
 			Elements tds = row.select("td");
 			if(tds.size() == 16) {
-				players.add(new Player(clean(tds.get(0)),
+				players.add(new PlayerDto(clean(tds.get(0)),
 						getNumbers(tds.get(1)),
 						getNumbers(tds.get(2)),
 						getNumbers(tds.get(3)),
