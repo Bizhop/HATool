@@ -1,5 +1,6 @@
 package fi.bizhop.hatool;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.bizhop.hatool.dto.PlayerDto;
+import fi.bizhop.hatool.entity.Player;
 import fi.bizhop.hatool.html.Reader;
 import fi.bizhop.hatool.service.PlayerService;
 
@@ -25,9 +27,20 @@ public class MainController {
     public String index() {
         return "Greetings from Spring Boot!";
     }
+    
+    @RequestMapping(value = "players", method = RequestMethod.GET, produces = "application/json")
+    public List<Player> getPlayers() {
+    	return playerService.getActivePlayers();
+    }
 
-    @RequestMapping(value = "/players", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
-    public void getPlayers(@RequestBody Map<String,String> cookies, HttpServletResponse response) throws Exception {
+    @RequestMapping(value = "/players", method = RequestMethod.PUT, consumes = "application/json")
+    public void getPlayers(@RequestBody List<String> input, HttpServletResponse response) throws Exception {
+    	Map<String, String> cookies = new HashMap<String, String>();
+    	for(String s : input) {
+    		String key = s.substring(0, s.indexOf('='));
+    		String value = s.substring(s.indexOf('=') + 1);
+    		cookies.put(key, value);
+    	}
     	List<PlayerDto> players = Reader.readPlayers(cookies);
     	if(playerService.savePlayers(players)) {
     		response.setStatus(HttpServletResponse.SC_OK);

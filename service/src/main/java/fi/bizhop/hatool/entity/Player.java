@@ -30,7 +30,10 @@ public class Player extends Base implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
-	@OneToMany(cascade = {CascadeType.MERGE}, mappedBy = "id")
+	@Column(name = "active")
+	private Boolean active;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
 	private List<PlayerData> data;
 	
 	public Player() {
@@ -50,6 +53,14 @@ public class Player extends Base implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public List<PlayerData> getData() {

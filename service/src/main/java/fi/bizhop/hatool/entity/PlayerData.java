@@ -28,7 +28,7 @@ public class PlayerData extends Base implements Serializable {
 	private Integer id;
 	
 	@JoinColumn(name = "player_id", referencedColumnName = "id")
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Player player;
 	
