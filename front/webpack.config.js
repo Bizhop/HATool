@@ -1,0 +1,49 @@
+const Path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: './public/index.html',
+  filename: 'index.html',
+  inject: 'body',
+})
+
+const CleanWebpackPluginConfig = new CleanWebpackPlugin(['dist'], {})
+
+module.exports = {
+  entry: ['babel-polyfill', './src/index.js'],
+  output: {
+    path: Path.resolve('dist'),
+    filename: 'hatool.[hash].js',
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['react'],
+        },
+      },
+    ],
+  },
+  plugins: [HtmlWebpackPluginConfig, CleanWebpackPluginConfig],
+  devServer: {
+    // If you use Vagrant or Cloud9, set
+    // host: '0.0.0.0';
+    //
+    // 0.0.0.0 is available to all network devices
+    // unlike default `localhost`.
+    host: '0.0.0.0', // Defaults to `localhost`
+    port: '8080', // Defaults to 8080
+    historyApiFallback: true,
+    proxy: {
+      '/api/*': {
+        target: 'http://localhost:8888',
+        secure: false,
+      },
+    },
+  },
+}

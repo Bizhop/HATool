@@ -1,16 +1,16 @@
 import React from 'react'
-import { Link, IndexLink } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => (
   <div className="text-center">
     <nav className="navbar navbar-default">
-      <IndexLink to="/" activeClassName="active">
+      <NavLink to="/" className="nav-link nav-item" activeClassName="active">
         Players
-      </IndexLink>
+      </NavLink>
       {' | '}
-      <Link to="import" activeClassName="active">
+      <NavLink to="/import" className="nav-link nav-item" activeClassName="active">
         Import
-      </Link>
+      </NavLink>
     </nav>
   </div>
 )

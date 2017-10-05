@@ -18,6 +18,7 @@ import fi.bizhop.hatool.html.Reader;
 import fi.bizhop.hatool.service.PlayerService;
 
 @RestController
+@RequestMapping("/api")
 public class MainController {
 	
 	@Autowired
@@ -28,7 +29,7 @@ public class MainController {
         return "Greetings from Spring Boot!";
     }
     
-    @RequestMapping(value = "players", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/players", method = RequestMethod.GET, produces = "application/json")
     public List<Player> getPlayers() {
     	return playerService.getActivePlayers();
     }

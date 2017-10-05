@@ -55,6 +55,7 @@ public class PlayerService {
 					data.setWeeks(dto.getViikko());
 					player.getData().add(data);
 					player.setActive(true);
+					player.setLatestData(data);
 					playerRepo.save(player);
 				}
 			}
