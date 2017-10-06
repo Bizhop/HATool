@@ -1,12 +1,18 @@
+import R from 'ramda'
 import { call, put, takeEvery } from 'redux-saga/effects'
 
 import Api from './Api'
 import { receivePlayers, playersFetchError, FETCH_PLAYERS_REQUEST } from './playersActions'
 
-function* fetchPlayers() {
+function* fetchPlayers(action) {
   try {
-    const players = yield call(Api.get, 'api/players', {})
-    yield put(receivePlayers(players))
+    const players = yield call(Api.get, 'api/players', {
+      params: {
+        size: 100,
+        sort: R.path(['params', 'sort'], action),
+      },
+    })
+    yield put(receivePlayers(players.content))
   } catch (e) {
     yield put(playersFetchError(e))
   }

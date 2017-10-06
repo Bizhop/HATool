@@ -8,12 +8,15 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import fi.bizhop.hatool.dao.PlayerRepository;
 import fi.bizhop.hatool.dto.PlayerDto;
 import fi.bizhop.hatool.entity.Player;
 import fi.bizhop.hatool.entity.PlayerData;
+import fi.bizhop.hatool.projection.PlayerProjection;
 
 @Service
 public class PlayerService {
@@ -53,6 +56,9 @@ public class PlayerService {
 					data.setExperience(dto.getKok());
 					data.setAbilityIndex(dto.getTi());
 					data.setWeeks(dto.getViikko());
+					if(dto.getLah() != null && dto.getPot() != null) {
+						data.setGrowthPotential(dto.getLah() * dto.getPot());
+					}
 					player.getData().add(data);
 					player.setActive(true);
 					player.setLatestData(data);
@@ -76,7 +82,7 @@ public class PlayerService {
 		return latest;
 	}
 
-	public List<Player> getActivePlayers() {
-		return playerRepo.findByActiveTrue();
+	public Page<PlayerProjection> getActivePlayers(Pageable pageable) {
+		return playerRepo.findByActiveTrue(pageable);
 	}
 }

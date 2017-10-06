@@ -1,18 +1,19 @@
 package fi.bizhop.hatool.dao;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import fi.bizhop.hatool.entity.Player;
+import fi.bizhop.hatool.projection.PlayerProjection;
 
-public interface PlayerRepository extends CrudRepository<Player, Integer> {
+public interface PlayerRepository extends PagingAndSortingRepository<Player, Integer> {
 
 	Player findByName(String nimi);
 	
-	List<Player> findByActiveTrue();
+	Page<PlayerProjection> findByActiveTrue(Pageable pageable);
 
 	@Modifying
 	@Query("UPDATE Player SET active = false")

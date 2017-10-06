@@ -5,11 +5,11 @@ Content-Type: application/json
 [
     "__utmz=229377541.1506337435.1.1.utmccn=(direct)|utmcsr=(direct)|utmcmd=(none)",
     "halang=en",
-    "PHPSESSID=jlnb9qln2fcs4ckhqrpr7bd526",
-    "__utma=229377541.1475077041.1506337435.1507208038.1507273935.5",
-    "__utmc=229377541", 
+    "PHPSESSID=s9afhq8bumb3k0h5mvqbbge0b4",
+    "__utma=229377541.1475077041.1506337435.1507273935.1507287319.6",
+    "__utmc=229377541",
     "__utmb=229377541"
 ]
 
 ###
-GET http://localhost:8888/api/players HTTP/1.1
+GET http://localhost:8888/api/players?sort=latestData.growthPotential,desc HTTP/1.1

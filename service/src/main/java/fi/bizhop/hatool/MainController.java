@@ -7,14 +7,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.bizhop.hatool.dto.PlayerDto;
-import fi.bizhop.hatool.entity.Player;
 import fi.bizhop.hatool.html.Reader;
+import fi.bizhop.hatool.projection.PlayerProjection;
 import fi.bizhop.hatool.service.PlayerService;
 
 @RestController
@@ -30,8 +32,8 @@ public class MainController {
     }
     
     @RequestMapping(value = "/players", method = RequestMethod.GET, produces = "application/json")
-    public List<Player> getPlayers() {
-    	return playerService.getActivePlayers();
+    public Page<PlayerProjection> getPlayers(Pageable pageable) {
+    	return playerService.getActivePlayers(pageable);
     }
 
     @RequestMapping(value = "/players", method = RequestMethod.PUT, consumes = "application/json")

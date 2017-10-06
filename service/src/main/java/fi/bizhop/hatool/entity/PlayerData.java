@@ -77,6 +77,9 @@ public class PlayerData extends Base implements Serializable {
 	@Column(name = "weeks")
 	private Integer weeks;
 	
+	@Column(name = "growth_potential")
+	private Integer growthPotential;
+	
 	public PlayerData() {
 	}
 
@@ -214,5 +217,13 @@ public class PlayerData extends Base implements Serializable {
 
 	public void setWeeks(Integer weeks) {
 		this.weeks = weeks;
+	}
+
+	public Integer getGrowthPotential() {
+		return growthPotential;
+	}
+
+	public void setGrowthPotential(Integer growthPotential) {
+		this.growthPotential = growthPotential;
 	}
 }
