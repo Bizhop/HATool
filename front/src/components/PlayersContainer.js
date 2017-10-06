@@ -4,6 +4,10 @@ import { connect } from 'react-redux'
 
 import { fetchPlayers } from './playersActions'
 
+const growthPotential = data => {
+  return data.quality * data.potential
+}
+
 const Player = props => (
   <tr>
     <td>{props.player.name}</td>
@@ -22,6 +26,7 @@ const Player = props => (
     <td>{props.player.latestData.experience}</td>
     <td>{props.player.latestData.abilityIndex}</td>
     <td>{props.player.latestData.weeks}</td>
+    <td>{growthPotential(props.player.latestData)}</td>
   </tr>
 )
 
@@ -50,6 +55,7 @@ const PlayersContainer = props => (
             <th>Kok</th>
             <th>TI</th>
             <th>Viikot</th>
+            <th>Kasvunvara</th>
           </tr>
           {props.players.map(p => <Player key={p.id} player={p} />)}
         </tbody>
