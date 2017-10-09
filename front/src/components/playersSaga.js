@@ -12,7 +12,12 @@ function* fetchPlayers(action) {
         sort: R.path(['params', 'sort'], action),
       },
     })
-    yield put(receivePlayers(players.content))
+    yield put(
+      receivePlayers({
+        players: players.content,
+        newSortColumn: action.params.newSortColumn,
+      }),
+    )
   } catch (e) {
     yield put(playersFetchError(e))
   }

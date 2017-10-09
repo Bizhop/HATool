@@ -2,8 +2,11 @@ package fi.bizhop.hatool.projection;
 
 import org.springframework.beans.factory.annotation.Value;
 
-public interface PlayerProjection {
+public interface PlayerListingProjection {
+	Integer getId();
 	String getName();
+	String getPosition();
+	String getStatus();
 	
 	@Value("#{target.getLatestData().getAge()}")
 	Integer getAge();

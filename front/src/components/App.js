@@ -1,9 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Header from '../common/Header'
 import PlayersContainer from './PlayersContainer'
+import PlayerContainer from './PlayerContainer'
 
 const NotFound = () => (
   <div className="container">
@@ -16,13 +16,14 @@ const NotFound = () => (
 const Routes = () => (
   <div className="container pt-5">
     <Switch>
-      <Route exact path="/" component={PlayersContainer} />
+      <Route exact path="/players" component={PlayersContainer} />
+      <Route exact path="/players/:id" component={PlayerContainer} />
       <Route component={NotFound} />
     </Switch>
   </div>
 )
 
-const App = props => (
+const App = () => (
   <div className="app">
     <Header />
     <Routes />

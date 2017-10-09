@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   players: [],
+  sortColumn: 'name',
 }
 
 const playersReducer = (state = initialState, action) => {
@@ -21,7 +22,8 @@ const playersReducer = (state = initialState, action) => {
     case FETCH_PLAYERS_SUCCESS:
       return {
         ...state,
-        players: action.players,
+        players: action.params.players,
+        sortColumn: action.params.newSortColumn,
       }
     default:
       return state

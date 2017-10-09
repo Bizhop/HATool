@@ -80,6 +80,9 @@ public class PlayerData extends Base implements Serializable {
 	@Column(name = "growth_potential")
 	private Integer growthPotential;
 	
+	@Column(name = "efficiency")
+	private Integer efficiency;
+	
 	public PlayerData() {
 	}
 
@@ -225,5 +228,13 @@ public class PlayerData extends Base implements Serializable {
 
 	public void setGrowthPotential(Integer growthPotential) {
 		this.growthPotential = growthPotential;
+	}
+
+	public Integer getEfficiency() {
+		return efficiency;
+	}
+
+	public void setEfficiency(Integer efficiency) {
+		this.efficiency = efficiency;
 	}
 }

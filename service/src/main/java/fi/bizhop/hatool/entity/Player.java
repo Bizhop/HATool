@@ -44,6 +44,12 @@ public class Player extends Base implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "latest_data")
 	private PlayerData latestData;
+	
+	@Column(name = "position")
+	private Position position;
+	
+	@Column(name = "status")
+	private Status status;
 
 	public Player() {
 	}
@@ -86,5 +92,21 @@ public class Player extends Base implements Serializable {
 
 	public void setLatestData(PlayerData latestData) {
 		this.latestData = latestData;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 }

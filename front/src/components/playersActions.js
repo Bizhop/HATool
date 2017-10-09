@@ -7,9 +7,9 @@ export const fetchPlayers = params => ({
   params,
 })
 
-export const receivePlayers = players => ({
+export const receivePlayers = params => ({
   type: FETCH_PLAYERS_SUCCESS,
-  players,
+  params,
 })
 
 export const playersFetchError = error => ({

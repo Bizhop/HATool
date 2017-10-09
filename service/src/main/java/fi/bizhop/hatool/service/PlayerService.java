@@ -14,9 +14,13 @@ import org.springframework.stereotype.Service;
 
 import fi.bizhop.hatool.dao.PlayerRepository;
 import fi.bizhop.hatool.dto.PlayerDto;
+import fi.bizhop.hatool.dto.UpdatePlayerDto;
 import fi.bizhop.hatool.entity.Player;
 import fi.bizhop.hatool.entity.PlayerData;
-import fi.bizhop.hatool.projection.PlayerProjection;
+import fi.bizhop.hatool.entity.Position;
+import fi.bizhop.hatool.entity.Status;
+import fi.bizhop.hatool.projection.PlayerDetailsProjection;
+import fi.bizhop.hatool.projection.PlayerListingProjection;
 
 @Service
 public class PlayerService {
@@ -60,10 +64,12 @@ public class PlayerService {
 						data.setGrowthPotential(dto.getLah() * dto.getPot());
 					}
 					player.getData().add(data);
-					player.setActive(true);
 					player.setLatestData(data);
-					playerRepo.save(player);
+					player.setPosition(Position.G); //default value
+					player.setStatus(Status.MV); //default value
 				}
+				player.setActive(true);
+				playerRepo.save(player);
 			}
 			return true;
 		} catch (Exception e) {
@@ -82,7 +88,19 @@ public class PlayerService {
 		return latest;
 	}
 
-	public Page<PlayerProjection> getActivePlayers(Pageable pageable) {
+	public Page<PlayerListingProjection> getActivePlayers(Pageable pageable) {
 		return playerRepo.findByActiveTrue(pageable);
+	}
+
+	public PlayerDetailsProjection getPlayer(Integer id) {
+		return playerRepo.findById(id);
+	}
+
+	public PlayerDetailsProjection updatePlayer(Integer id, UpdatePlayerDto dto) {
+		Player player = playerRepo.findOne(id);
+		player.setPosition(dto.getPosition());
+		player.setStatus(dto.getStatus());
+		playerRepo.save(player);
+		return playerRepo.findById(id);
 	}
 }
