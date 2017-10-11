@@ -2,16 +2,14 @@ import React from 'react'
 import R from 'ramda'
 import { connect } from 'react-redux'
 
-import { fetchPlayer } from './playerActions'
+import { fetchPlayer, updatePlayer } from './playerActions'
+import UpdatePlayerForm from './UpdatePlayerForm'
 
 const Data = props => {
   const data = props.data
   return (
     <tr>
       <td>{data.createdAt}</td>
-      <td>{data.age}</td>
-      <td>{data.quality}</td>
-      <td>{data.potential}</td>
       <td>{data.goalie}</td>
       <td>{data.defence}</td>
       <td>{data.attack}</td>
@@ -25,32 +23,39 @@ const Data = props => {
       <td>{data.abilityIndex}</td>
       <td>{data.weeks}</td>
       <td>{data.growthPotential}</td>
+      <td>{data.efficiency}</td>
     </tr>
   )
 }
 
+const initialValues = player => ({
+  id: player.id,
+  position: player.position,
+  status: player.status,
+})
+
 const PlayerContainer = props =>
-  props.player ? (
+  props.player && !props.fetching ? (
     <div className="container">
       <div className="row">
-        <div className="col-md-2">Player</div>
+        <div className="col-md-2">Nimi</div>
         <div className="col-md-10">{props.player.name}</div>
       </div>
       <div className="row">
-        <div className="col-md-2">Position</div>
-        <div className="col-md-10">{props.player.position}</div>
+        <div className="col-md-2">Ikä</div>
+        <div className="col-md-10">{props.player.age}</div>
       </div>
       <div className="row">
-        <div className="col-md-2">Status</div>
-        <div className="col-md-10">{props.player.status}</div>
+        <div className="col-md-2">Lahjakkuus / Potentiaali</div>
+        <div className="col-md-10">
+          {props.player.quality} / {props.player.potential}
+        </div>
       </div>
+      <UpdatePlayerForm onSubmit={props.updatePlayer} initialValues={initialValues(props.player)} />
       <table className="table table-responsive table-borderless small">
         <thead>
           <tr>
             <th>Pvm</th>
-            <th>Ikä</th>
-            <th>Lah</th>
-            <th>Pot</th>
             <th>MV</th>
             <th>Puo</th>
             <th>Hyö</th>
@@ -64,6 +69,7 @@ const PlayerContainer = props =>
             <th>TI</th>
             <th>Viikot</th>
             <th>Kasvunvara</th>
+            <th>Tehokkuus</th>
           </tr>
         </thead>
         <tbody>
@@ -75,12 +81,14 @@ const PlayerContainer = props =>
 
 const mapStateToProps = state => ({
   player: R.path(['player', 'player'], state),
+  fetching: state.player.fetching,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const playerId = R.path(['match', 'params', 'id'], ownProps)
   return {
     getPlayer: dispatch(fetchPlayer(playerId)),
+    updatePlayer: params => dispatch(updatePlayer(params)),
   }
 }
 

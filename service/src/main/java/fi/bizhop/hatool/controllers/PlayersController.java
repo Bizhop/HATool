@@ -43,7 +43,7 @@ public class PlayersController extends BaseController {
     	return playerService.updatePlayer(id, dto);
     }
 
-    @RequestMapping(value = "/players/", method = RequestMethod.PUT, consumes = "application/json")
+    @RequestMapping(value = "/players/import", method = RequestMethod.PUT, consumes = "application/json")
     public void importPlayers(@RequestBody List<String> input, HttpServletResponse response) throws Exception {
     	Map<String, String> cookies = new HashMap<String, String>();
     	for(String s : input) {

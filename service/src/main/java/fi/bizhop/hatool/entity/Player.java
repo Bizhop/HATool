@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -38,6 +39,7 @@ public class Player extends Base implements Serializable {
 	private Boolean active;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+	@OrderBy("createdAt DESC")
 	@JsonIgnore
 	private List<PlayerData> data;
 	

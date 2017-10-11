@@ -34,6 +34,7 @@ const Player = props => {
       <td>{player.abilityIndex}</td>
       <td>{player.weeks}</td>
       <td>{player.growthPotential}</td>
+      <td>{player.efficiency}</td>
     </tr>
   )
 }
@@ -178,6 +179,13 @@ const PlayersContainer = props => (
             label="Kasvunvara"
             sortColumn={props.sortColumn}
             newSortColumn="growthPotential"
+          />
+          <ThWithButton
+            updatePlayers={props.updatePlayers}
+            sort="latestData.efficiency,desc"
+            label="Tehokkuus"
+            sortColumn={props.sortColumn}
+            newSortColumn="efficiency"
           />
         </tr>
       </thead>

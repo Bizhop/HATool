@@ -63,10 +63,13 @@ public class PlayerService {
 					if(dto.getLah() != null && dto.getPot() != null) {
 						data.setGrowthPotential(dto.getLah() * dto.getPot());
 					}
+					if(dto.getTi() != null && dto.getKok() != null) {
+						data.setEfficiency(dto.getTi() + (dto.getKok() / 2));
+					}
 					player.getData().add(data);
 					player.setLatestData(data);
 					player.setPosition(Position.G); //default value
-					player.setStatus(Status.MV); //default value
+					player.setStatus(Status.NEW); //default value
 				}
 				player.setActive(true);
 				playerRepo.save(player);

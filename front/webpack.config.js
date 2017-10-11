@@ -3,6 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
+const extractSass = new ExtractTextPlugin({
+  filename: 'styles.[contenthash].css',
+  disable: process.env.NODE_ENV === 'development',
+})
+
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './public/index.html',
   filename: 'index.html',
@@ -26,6 +31,41 @@ module.exports = {
         query: {
           presets: ['react'],
         },
+      },
+      {
+        test: /\.scss$/,
+        use: extractSass.extract({
+          use: [
+            {
+              loader: 'css-loader',
+            },
+            {
+              loader: 'sass-loader',
+            },
+          ],
+          // use style-loader in development
+          fallback: 'style-loader',
+        }),
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpg|gif|ttf|eot|svg|ico)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader?name=[path][name].[hash].[ext]',
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff',
+            },
+          },
+        ],
       },
     ],
   },

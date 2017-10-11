@@ -5,9 +5,6 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public interface PlayerDataProjection {
-	Integer getAge();
-	Integer getQuality();
-	Integer getPotential();
 	Integer getGoalie();
 	Integer getDefence();
 	Integer getAttack();
@@ -21,6 +18,7 @@ public interface PlayerDataProjection {
 	Integer getAbilityIndex();
 	Integer getWeeks();
 	Integer getGrowthPotential();
+	Integer getEfficiency();
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	Date getCreatedAt();

@@ -40,4 +40,6 @@ public interface PlayerListingProjection {
 	Integer getWeeks();
 	@Value("#{target.getLatestData().getGrowthPotential()}")
 	Integer getGrowthPotential();
+	@Value("#{target.getLatestData().getEfficiency()}")
+	Integer getEfficiency();
 }
