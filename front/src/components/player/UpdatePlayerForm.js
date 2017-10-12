@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-import { RenderSelectInput } from '../shared/FormInput'
+import { RenderSelectInput, RenderTextInput } from '../shared/FormInput'
 
 const positionList = [
   { name: 'G', value: 'G' },
@@ -44,6 +44,11 @@ const updatePlayerForm = props => (
           component={RenderSelectInput}
           options={statusList}
         />
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-md-2">
+        <Field name="loyalty" label="Uskollisuus" type="text" component={RenderTextInput} />
       </div>
     </div>
     <button type="submit" className="btn btn-primary">

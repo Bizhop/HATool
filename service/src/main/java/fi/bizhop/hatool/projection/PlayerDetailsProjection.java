@@ -16,6 +16,7 @@ public interface PlayerDetailsProjection {
 	Boolean getActive();
 	String getPosition();
 	String getStatus();
+	Integer getLoyalty();
 	@Value("#{target.getData()}")
 	List<PlayerDataProjection> getData();
 }

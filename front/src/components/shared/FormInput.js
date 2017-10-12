@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RenderInputField = ({ input, label, type, meta: { touched, error } }) => (
+const RenderTextInput = ({ input, label, type, meta: { touched, error } }) => (
   <div className="form-group">
     <label className="form-control-label" htmlFor={input.name}>
       {label}
@@ -30,4 +30,4 @@ const RenderSelectInput = ({ input, label, type, options, meta: { touched, error
   )
 }
 
-export { RenderSelectInput, RenderInputField }
+export { RenderSelectInput, RenderTextInput }

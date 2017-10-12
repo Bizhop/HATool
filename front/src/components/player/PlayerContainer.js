@@ -32,6 +32,7 @@ const initialValues = player => ({
   id: player.id,
   position: player.position,
   status: player.status,
+  loyalty: player.loyalty,
 })
 
 const PlayerContainer = props =>
@@ -81,7 +82,7 @@ const PlayerContainer = props =>
 
 const mapStateToProps = state => ({
   player: R.path(['player', 'player'], state),
-  fetching: state.player.fetching,
+  fetching: R.path(['player', 'fetching'], state),
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {

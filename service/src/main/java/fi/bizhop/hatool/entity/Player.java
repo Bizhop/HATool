@@ -52,6 +52,9 @@ public class Player extends Base implements Serializable {
 	
 	@Column(name = "status")
 	private Status status;
+	
+	@Column(name = "loyalty")
+	private Integer loyalty;
 
 	public Player() {
 	}
@@ -110,5 +113,13 @@ public class Player extends Base implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public Integer getLoyalty() {
+		return loyalty;
+	}
+
+	public void setLoyalty(Integer loyalty) {
+		this.loyalty = loyalty;
 	}
 }

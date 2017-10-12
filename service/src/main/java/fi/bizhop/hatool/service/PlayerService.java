@@ -103,6 +103,7 @@ public class PlayerService {
 		Player player = playerRepo.findOne(id);
 		player.setPosition(dto.getPosition());
 		player.setStatus(dto.getStatus());
+		player.setLoyalty(dto.getLoyalty());
 		playerRepo.save(player);
 		return playerRepo.findById(id);
 	}

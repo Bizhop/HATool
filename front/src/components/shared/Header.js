@@ -13,6 +13,10 @@ const Header = () => (
           Pelaajat
         </NavLink>
         {' | '}
+        <NavLink to="/lines" className="nav-link nav-item" activeClassName="active">
+          Ketjut
+        </NavLink>
+        {' | '}
         <NavLink to="/import" className="nav-link nav-item" activeClassName="active">
           Tuonti
         </NavLink>
