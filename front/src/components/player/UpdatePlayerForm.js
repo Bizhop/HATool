@@ -1,25 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-const RenderSelectInput = ({ input, label, type, options, meta: { touched, error } }) => {
-  const optionList = options.map(opt => (
-    <option key={opt.value} value={opt.value}>
-      {opt.name}
-    </option>
-  ))
-  return (
-    <div className="form-group">
-      <label className="form-control-label" htmlFor={input.name}>
-        {label}
-      </label>
-      <select className="form-control" {...input} type={type}>
-        <option value="">Valitse...</option>
-        {optionList}
-      </select>
-      {touched && error && <span className="text-danger">{error}</span>}
-    </div>
-  )
-}
+import { RenderSelectInput } from '../shared/FormInput'
 
 const positionList = [
   { name: 'G', value: 'G' },
@@ -47,6 +29,7 @@ const updatePlayerForm = props => (
         <Field
           name="position"
           label="Pelipaikka"
+          type="select"
           component={RenderSelectInput}
           options={positionList}
         />
@@ -54,7 +37,13 @@ const updatePlayerForm = props => (
     </div>
     <div className="row">
       <div className="col-md-2">
-        <Field name="status" label="Status" component={RenderSelectInput} options={statusList} />
+        <Field
+          name="status"
+          label="Status"
+          type="select"
+          component={RenderSelectInput}
+          options={statusList}
+        />
       </div>
     </div>
     <button type="submit" className="btn btn-primary">

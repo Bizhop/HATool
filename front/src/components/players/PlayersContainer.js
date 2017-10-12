@@ -18,29 +18,29 @@ const Player = props => {
           {player.name}
         </NavLink>
       </td>
-      <td>{player.age}</td>
-      <td>{player.quality}</td>
-      <td>{player.potential}</td>
-      <td>{player.goalie}</td>
-      <td>{player.defence}</td>
-      <td>{player.attack}</td>
-      <td>{player.shooting}</td>
-      <td>{player.passing}</td>
-      <td>{player.speed}</td>
-      <td>{player.strength}</td>
-      <td>{player.selfControl}</td>
-      <td>{player.form}</td>
-      <td>{player.experience}</td>
-      <td>{player.abilityIndex}</td>
-      <td>{player.weeks}</td>
-      <td>{player.growthPotential}</td>
-      <td>{player.efficiency}</td>
+      <td className="text-center">{player.age}</td>
+      <td className="text-center">{player.quality}</td>
+      <td className="text-center">{player.potential}</td>
+      <td className="text-center">{player.goalie}</td>
+      <td className="text-center">{player.defence}</td>
+      <td className="text-center">{player.attack}</td>
+      <td className="text-center">{player.shooting}</td>
+      <td className="text-center">{player.passing}</td>
+      <td className="text-center">{player.speed}</td>
+      <td className="text-center">{player.strength}</td>
+      <td className="text-center">{player.selfControl}</td>
+      <td className="text-center">{player.form}</td>
+      <td className="text-center">{player.experience}</td>
+      <td className="text-center">{player.abilityIndex}</td>
+      <td className="text-center">{player.weeks}</td>
+      <td className="text-center">{player.growthPotential}</td>
+      <td className="text-center">{player.efficiency}</td>
     </tr>
   )
 }
 
 const ThWithButton = props => (
-  <th>
+  <th className={props.className}>
     <button
       className="btn btn-link"
       onClick={() =>
@@ -58,7 +58,7 @@ const ThWithButton = props => (
 const PlayersContainer = props => (
   <div className="container">
     <h1>Pelaajat ({props.players.length})</h1>
-    <table className="table table-responsive table-borderless small">
+    <table className="table small custom-table">
       <thead>
         <tr>
           <ThWithButton
@@ -67,6 +67,7 @@ const PlayersContainer = props => (
             label="Nimi"
             sortColumn={props.sortColumn}
             newSortColumn="name"
+            className="col-md-2"
           />
           <ThWithButton
             updatePlayers={props.updatePlayers}

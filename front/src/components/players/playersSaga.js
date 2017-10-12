@@ -1,7 +1,7 @@
 import R from 'ramda'
 import { call, put, takeEvery } from 'redux-saga/effects'
 
-import Api from './Api'
+import Api from '../Api'
 import { receivePlayers, playersFetchError, FETCH_PLAYERS_REQUEST } from './playersActions'
 
 function* fetchPlayers(action) {

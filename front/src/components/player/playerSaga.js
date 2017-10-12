@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
-import Api from './Api'
+import Api from '../Api'
 import {
   receivePlayer,
   playerFetchError,

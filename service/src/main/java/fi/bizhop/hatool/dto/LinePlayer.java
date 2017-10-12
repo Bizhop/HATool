@@ -3,10 +3,12 @@ package fi.bizhop.hatool.dto;
 public class LinePlayer {
 	Integer id;
 	String name;
+	String position;
 	
-	public LinePlayer(Integer id, String name) {
+	public LinePlayer(Integer id, String name, String position) {
 		this.id = id;
 		this.name = name;
+		this.position = position;
 	}
 	
 	public Integer getId() {
@@ -20,5 +22,11 @@ public class LinePlayer {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
 	}
 }

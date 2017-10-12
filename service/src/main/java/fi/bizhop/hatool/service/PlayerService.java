@@ -37,6 +37,8 @@ public class PlayerService {
 				if(player == null) {
 					player = new Player();
 					player.setName(dto.getNimi());
+					player.setPosition(Position.G); //default value
+					player.setStatus(Status.NEW); //default value
 				}
 				if(player.getData() == null) {
 					player.setData(new ArrayList<PlayerData>());
@@ -68,8 +70,6 @@ public class PlayerService {
 					}
 					player.getData().add(data);
 					player.setLatestData(data);
-					player.setPosition(Position.G); //default value
-					player.setStatus(Status.NEW); //default value
 				}
 				player.setActive(true);
 				playerRepo.save(player);

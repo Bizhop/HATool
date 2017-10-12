@@ -13,6 +13,17 @@ public class LinesDto {
 	private Line j3;
 	private List<LinePlayer> goalies;
 	private List<LinePlayer> extra;
+	private List<LinePlayer> sell;
+	
+	public LinesDto() {
+		y1 = new Line();
+		y2 = new Line();
+		y3 = new Line();
+		y4 = new Line();
+		j1 = new Line();
+		j2 = new Line();
+		j3 = new Line();
+	}
 	
 	public Line getY1() {
 		return y1;
@@ -67,5 +78,12 @@ public class LinesDto {
 			extra = new ArrayList<LinePlayer>();
 		}
 		return extra;
+	}
+
+	public List<LinePlayer> getSell() {
+		if(sell == null) {
+			sell = new ArrayList<LinePlayer>();
+		}
+		return sell;
 	}
 }

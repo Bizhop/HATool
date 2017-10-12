@@ -2,8 +2,9 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import Header from '../common/Header'
-import PlayersContainer from './PlayersContainer'
-import PlayerContainer from './PlayerContainer'
+import PlayersContainer from './players/PlayersContainer'
+import PlayerContainer from './player/PlayerContainer'
+import ImportContainer from './import/ImportContainer'
 
 const NotFound = () => (
   <div className="container">
@@ -18,6 +19,7 @@ const Routes = () => (
     <Switch>
       <Route exact path="/players" component={PlayersContainer} />
       <Route exact path="/players/:id" component={PlayerContainer} />
+      <Route exact path="/import" component={ImportContainer} />
       <Route component={NotFound} />
     </Switch>
   </div>
