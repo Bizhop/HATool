@@ -1,10 +1,11 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Header from '../common/Header'
+import Header from './shared/Header'
 import PlayersContainer from './players/PlayersContainer'
 import PlayerContainer from './player/PlayerContainer'
 import ImportContainer from './import/ImportContainer'
+import DashContainer from './dash/DashContainer'
 
 const NotFound = () => (
   <div className="container">
@@ -17,6 +18,7 @@ const NotFound = () => (
 const Routes = () => (
   <div className="container pt-5">
     <Switch>
+      <Route exact path="/" component={DashContainer} />
       <Route exact path="/players" component={PlayersContainer} />
       <Route exact path="/players/:id" component={PlayerContainer} />
       <Route exact path="/import" component={ImportContainer} />

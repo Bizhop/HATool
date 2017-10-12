@@ -4,3 +4,7 @@ table.custom-table {
   word-wrap: normal;
   white-space: nowrap;
 }
+
+.smaller {
+  font-size: 75%;
+}

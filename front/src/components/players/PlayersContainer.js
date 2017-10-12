@@ -58,7 +58,7 @@ const ThWithButton = props => (
 const PlayersContainer = props => (
   <div className="container">
     <h1>Pelaajat ({props.players.length})</h1>
-    <table className="table small custom-table">
+    <table className="table table-condensed smaller custom-table">
       <thead>
         <tr>
           <ThWithButton
