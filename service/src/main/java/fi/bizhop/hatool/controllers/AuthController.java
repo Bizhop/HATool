@@ -30,12 +30,15 @@ public class AuthController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
-	public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if(authService.login(request)) {
-			response.setStatus(HttpServletResponse.SC_OK);
+	public UserDto login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Person user = authService.login(request);
+		if(user == null) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
 		}
 		else {
-			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			response.setStatus(HttpServletResponse.SC_ACCEPTED);
+			return new UserDto(user.getEmail());
 		}
 	}
 }

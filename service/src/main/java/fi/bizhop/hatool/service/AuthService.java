@@ -19,10 +19,10 @@ public class AuthService {
 		return personRepo.findByEmail(userEmail);
 	}
 
-	public boolean login(HttpServletRequest request) throws Exception {
+	public Person login(HttpServletRequest request) throws Exception {
 		String userEmail = TokenAuthentication.getUserEmail(request);
 		if(userEmail == null) {
-			return false;
+			return null;
 		}
 		else {
 			Person user = personRepo.findByEmail(userEmail);
@@ -30,7 +30,7 @@ public class AuthService {
 				user = new Person(userEmail);
 				personRepo.save(user);
 			}
-			return true;
+			return user;
 		}
 	}
 }
