@@ -7,7 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
+import fi.bizhop.hatool.entity.Person;
 import fi.bizhop.hatool.entity.Player;
 import fi.bizhop.hatool.projection.PlayerDetailsProjection;
 import fi.bizhop.hatool.projection.PlayerListingProjection;
@@ -18,13 +20,13 @@ public interface PlayerRepository extends PagingAndSortingRepository<Player, Int
 
 	Player findByName(String nimi);
 	
-	Page<PlayerListingProjection> findByActiveTrue(Pageable pageable);
+	Page<PlayerListingProjection> findByActiveTrueAndOwner(Person owner, Pageable pageable);
 	
-	List<Player> findByActiveTrue();
+	List<Player> findByActiveTrueAndOwner(Person owner);
 	
-	PlayerDetailsProjection findById(Integer id);
+	PlayerDetailsProjection findByIdAndOwner(Integer id, Person owner);
 
 	@Modifying
-	@Query("UPDATE Player SET active = false")
-	void disableAll();
+	@Query("UPDATE Player SET active = false WHERE owner = :owner")
+	void disableAllByOwner(@Param("owner") Person owner);
 }

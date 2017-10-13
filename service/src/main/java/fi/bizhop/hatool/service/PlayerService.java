@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import fi.bizhop.hatool.dao.PlayerRepository;
 import fi.bizhop.hatool.dto.PlayerDto;
 import fi.bizhop.hatool.dto.UpdatePlayerDto;
+import fi.bizhop.hatool.entity.Person;
 import fi.bizhop.hatool.entity.Player;
 import fi.bizhop.hatool.entity.PlayerData;
 import fi.bizhop.hatool.entity.Position;
@@ -29,8 +30,8 @@ public class PlayerService {
 	PlayerRepository playerRepo;
 
 	@Transactional
-	public boolean savePlayers(List<PlayerDto> players) {
-		playerRepo.disableAll();
+	public boolean savePlayers(Person owner, List<PlayerDto> players) {
+		playerRepo.disableAllByOwner(owner);
 		try {
 			for(PlayerDto dto : players) {
 				Player player = playerRepo.findByName(dto.getNimi());
@@ -39,6 +40,7 @@ public class PlayerService {
 					player.setName(dto.getNimi());
 					player.setPosition(Position.G); //default value
 					player.setStatus(Status.NEW); //default value
+					player.setOwner(owner);
 				}
 				if(player.getData() == null) {
 					player.setData(new ArrayList<PlayerData>());
@@ -91,20 +93,22 @@ public class PlayerService {
 		return latest;
 	}
 
-	public Page<PlayerListingProjection> getActivePlayers(Pageable pageable) {
-		return playerRepo.findByActiveTrue(pageable);
+	public Page<PlayerListingProjection> getActivePlayers(Person owner, Pageable pageable) {
+		return playerRepo.findByActiveTrueAndOwner(owner, pageable);
 	}
 
-	public PlayerDetailsProjection getPlayer(Integer id) {
-		return playerRepo.findById(id);
+	public PlayerDetailsProjection getPlayer(Person owner, Integer id) {
+		return playerRepo.findByIdAndOwner(id, owner);
 	}
 
-	public PlayerDetailsProjection updatePlayer(Integer id, UpdatePlayerDto dto) {
+	public PlayerDetailsProjection updatePlayer(Person owner, Integer id, UpdatePlayerDto dto) {
 		Player player = playerRepo.findOne(id);
-		player.setPosition(dto.getPosition());
-		player.setStatus(dto.getStatus());
-		player.setLoyalty(dto.getLoyalty());
-		playerRepo.save(player);
-		return playerRepo.findById(id);
+		if(player != null && player.getOwner() != null && player.getOwner().getId() == owner.getId()) {
+			player.setPosition(dto.getPosition());
+			player.setStatus(dto.getStatus());
+			player.setLoyalty(dto.getLoyalty());
+			playerRepo.save(player);
+		}
+		return playerRepo.findByIdAndOwner(id, owner);
 	}
 }

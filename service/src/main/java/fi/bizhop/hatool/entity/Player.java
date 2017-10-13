@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
@@ -55,6 +56,11 @@ public class Player extends Base implements Serializable {
 	
 	@Column(name = "loyalty")
 	private Integer loyalty;
+	
+	@JoinColumn(name = "person_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Person owner;
 
 	public Player() {
 	}
@@ -121,5 +127,13 @@ public class Player extends Base implements Serializable {
 
 	public void setLoyalty(Integer loyalty) {
 		this.loyalty = loyalty;
+	}
+
+	public Person getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Person owner) {
+		this.owner = owner;
 	}
 }

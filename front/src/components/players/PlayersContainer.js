@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import { fetchPlayers } from './playersActions'
+import { plus } from '../shared/images'
 
 const Player = props => {
   const player = props.player
@@ -17,6 +18,7 @@ const Player = props => {
         >
           {player.name}
         </NavLink>
+        {player.status === 'NEW' && <img alt="new" src={plus} />}
       </td>
       <td className="text-center">{player.age}</td>
       <td className="text-center">{player.quality}</td>

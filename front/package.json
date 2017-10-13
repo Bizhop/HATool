@@ -39,6 +39,7 @@
     "react-autocomplete": "1.7.1",
     "react-datepicker": "0.53.0",
     "react-dom": "15.6.1",
+    "react-google-login": "^2.11.3",
     "react-modal": "2.2.4",
     "react-paginate": "4.4.3",
     "react-redux": "5.0.6",

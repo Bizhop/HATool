@@ -11,6 +11,7 @@ import fi.bizhop.hatool.dao.PlayerRepository;
 import fi.bizhop.hatool.dto.Line;
 import fi.bizhop.hatool.dto.LinePlayer;
 import fi.bizhop.hatool.dto.LinesDto;
+import fi.bizhop.hatool.entity.Person;
 import fi.bizhop.hatool.entity.Player;
 import fi.bizhop.hatool.entity.PlayerData;
 import fi.bizhop.hatool.entity.Position;
@@ -25,10 +26,10 @@ public class TeamService {
 	@Autowired
 	PlayerDataRepository playerDataRepo;
 
-	public LinesDto getBestLines() {
+	public LinesDto getBestLines(Person owner) {
 		LinesDto lines = new LinesDto();
 
-		List<Player> players = playerRepo.findByActiveTrue();
+		List<Player> players = playerRepo.findByActiveTrueAndOwner(owner);
 		
 		//Poistetaan myytävät pelaajat
 		Player sell = findByStatus(players, Status.SELL);
@@ -117,7 +118,6 @@ public class TeamService {
 	private Player findByPosition(List<Player> players, Position pos) {
 		for(Player p : players) {
 			if(p.getPosition() == pos) {
-				System.out.println(String.format("Found player %s by position %s", p.getName(), p.getPosition() ));
 				return p;
 			}
 		}
@@ -127,7 +127,6 @@ public class TeamService {
 	private Player findByStatus(List<Player> players, Status status) {
 		for(Player p : players) {
 			if(p.getStatus() == status) {
-				System.out.println(String.format("Found player %s by status %s", p.getName(), p.getStatus() ));
 				return p;
 			}
 		}

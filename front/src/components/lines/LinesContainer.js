@@ -1,27 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import R from 'ramda'
+import { NavLink } from 'react-router-dom'
 
 import { fetchLines } from './linesActions'
 
-const RenderLine = props => {
-  const line = props.line
-  const lines = props.lines
-  return (
-    <div>
-      <h4>{R.toUpper(line)}</h4>
-      <div className="row">
-        <div className="col-md-2 text-center">LW {R.path([line, 'lw', 'name'], lines)}</div>
-        <div className="col-md-2 text-center">C {R.path([line, 'c', 'name'], lines)}</div>
-        <div className="col-md-2 text-center">RW {R.path([line, 'rw', 'name'], lines)}</div>
-      </div>
-      <div className="row">
-        <div className="col-md-3 text-center">LD {R.path([line, 'ld', 'name'], lines)}</div>
-        <div className="col-md-3 text-center">RD {R.path([line, 'rd', 'name'], lines)}</div>
-      </div>
+const RenderLine = props => (
+  <div>
+    <h4>{R.toUpper(props.line)}</h4>
+    <div className="row">
+      <RenderForward position="lw" line={props.line} lines={props.lines} />
+      <RenderForward position="c" line={props.line} lines={props.lines} />
+      <RenderForward position="rw" line={props.line} lines={props.lines} />
     </div>
-  )
-}
+    <div className="row">
+      <RenderDefender position="ld" line={props.line} lines={props.lines} />
+      <RenderDefender position="rd" line={props.line} lines={props.lines} />
+    </div>
+  </div>
+)
+
+const RenderForward = props => (
+  <div className="col-md-2 text-center">
+    {R.toUpper(props.position)} {R.path([props.line, props.position, 'name'], props.lines)}
+  </div>
+)
+
+const RenderDefender = props => (
+  <div className="col-md-3 text-center">
+    {R.toUpper(props.position)} {R.path([props.line, props.position, 'name'], props.lines)}
+  </div>
+)
 
 const RenderList = props => {
   const name = props.name
@@ -36,7 +45,16 @@ const RenderList = props => {
 
 const RenderPlayer = props => (
   <div className="row">
-    <div className="col-md-2">{props.player.name}</div>
+    <div className="col-md-1 text-right">{props.player.position}</div>
+    <div className="col-md-2">
+      <NavLink
+        to={`/players/${props.player.id}`}
+        className="nav-link nav-item"
+        activeClassName="active"
+      >
+        {props.player.name}
+      </NavLink>
+    </div>
   </div>
 )
 
