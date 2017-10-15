@@ -32,9 +32,10 @@ const Header = props => (
                   Tuonti
                 </NavLink>
               </div>
+              <div className="col-md-7 text-right">Kirjautunut käyttäjä: {props.loggedEmail}</div>
               <div className="col-md-1">
                 <button onClick={() => props.logout()} className="btn btn-primary">
-                  Logout
+                  Kirjaudu ulos
                 </button>
               </div>
             </div>
@@ -47,6 +48,7 @@ const Header = props => (
 
 const mapStateToProps = state => ({
   loggedIn: R.path(['user', 'token'], state),
+  loggedEmail: R.path(['user', 'email'], state),
 })
 
 const mapDispatchToProps = dispatch => ({

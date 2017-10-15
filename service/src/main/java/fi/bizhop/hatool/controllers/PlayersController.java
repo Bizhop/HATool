@@ -35,12 +35,14 @@ public class PlayersController extends BaseController {
 	AuthService authService;
 
 	@RequestMapping(value = "/players", method = RequestMethod.GET, produces = "application/json")
-	public Page<PlayerListingProjection> getPlayers(Pageable pageable, HttpServletRequest request) throws Exception {
+	public Page<PlayerListingProjection> getPlayers(Pageable pageable, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Person owner = authService.getUser(request);
 		if(owner == null) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			return null;
 		}
 		else {
+			response.setStatus(HttpServletResponse.SC_OK);
 			return playerService.getActivePlayers(owner, pageable);
 		}
 	}

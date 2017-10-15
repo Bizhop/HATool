@@ -1,7 +1,7 @@
 import React from 'react'
 import R from 'ramda'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 
 import { fetchPlayers } from './playersActions'
 import { plus } from '../shared/images'
@@ -194,12 +194,15 @@ const PlayersContainer = props => (
       </thead>
       <tbody>{props.players.map(p => <Player key={p.name} player={p} />)}</tbody>
     </table>
+    {!props.loggedIn && <Redirect to="/" />}
   </div>
 )
 
 const mapStateToProps = state => ({
   players: R.pathOr([], ['players', 'players'], state),
   sortColumn: R.path(['players', 'sortColumn'], state),
+  token: R.path(['user', 'token'], state),
+  loggedIn: R.path(['user', 'token'], state),
 })
 
 const mapDispatchToProps = dispatch => ({

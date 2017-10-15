@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import R from 'ramda'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 
 import { fetchLines } from './linesActions'
 
@@ -22,13 +22,27 @@ const RenderLine = props => (
 
 const RenderForward = props => (
   <div className="col-md-2 text-center">
-    {R.toUpper(props.position)} {R.path([props.line, props.position, 'name'], props.lines)}
+    {R.toUpper(props.position)}{' '}
+    <NavLink
+      to={`/players/${R.path([props.line, props.position, 'id'], props.lines)}`}
+      className="nav-link nav-item"
+      activeClassName="active"
+    >
+      {R.path([props.line, props.position, 'name'], props.lines)}
+    </NavLink>
   </div>
 )
 
 const RenderDefender = props => (
   <div className="col-md-3 text-center">
-    {R.toUpper(props.position)} {R.path([props.line, props.position, 'name'], props.lines)}
+    {R.toUpper(props.position)}{' '}
+    <NavLink
+      to={`/players/${R.path([props.line, props.position, 'id'], props.lines)}`}
+      className="nav-link nav-item"
+      activeClassName="active"
+    >
+      {R.path([props.line, props.position, 'name'], props.lines)}
+    </NavLink>
   </div>
 )
 
@@ -72,12 +86,14 @@ const LinesContainer = props =>
       <RenderList name="Maalivahdit" lines={props.lines} type="goalies" />
       <RenderList name="Myytävät" lines={props.lines} type="sell" />
       <RenderList name="Ylimääräiset" lines={props.lines} type="extra" />
+      {!props.loggedIn && <Redirect to="/" />}
     </div>
   ) : null
 
 const mapStateToProps = state => ({
   lines: R.path(['lines', 'lines'], state),
   fetching: R.path(['lines', 'fetching'], state),
+  loggedIn: R.path(['user', 'token'], state),
 })
 
 const mapDispatchToProps = dispatch => ({

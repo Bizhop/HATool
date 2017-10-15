@@ -10,6 +10,7 @@ function* login(action) {
       headers: { Authorization: token },
     })
     localStorage.setItem('hatool-token', token)
+    localStorage.setItem('hatool-email', response.email)
     yield put(
       loginSuccess({
         email: response.email,

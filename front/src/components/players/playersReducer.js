@@ -6,7 +6,6 @@ import {
 
 const initialState = {
   players: [],
-  sortColumn: 'name',
 }
 
 const playersReducer = (state = initialState, action) => {

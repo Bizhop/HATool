@@ -1,6 +1,7 @@
 import React from 'react'
 import R from 'ramda'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import { fetchPlayer, updatePlayer } from './playerActions'
 import UpdatePlayerForm from './UpdatePlayerForm'
@@ -77,12 +78,14 @@ const PlayerContainer = props =>
           {props.player.data && props.player.data.map(d => <Data key={d.createdAt} data={d} />)}
         </tbody>
       </table>
+      {!props.loggedIn && <Redirect to="/" />}
     </div>
   ) : null
 
 const mapStateToProps = state => ({
   player: R.path(['player', 'player'], state),
   fetching: R.path(['player', 'fetching'], state),
+  loggedIn: R.path(['user', 'token'], state),
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {

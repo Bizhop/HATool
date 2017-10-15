@@ -2,6 +2,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from './userActio
 
 const initialState = {
   token: localStorage.getItem('hatool-token'),
+  email: localStorage.getItem('hatool-email'),
 }
 
 const userReducer = (state = initialState, action) => {
