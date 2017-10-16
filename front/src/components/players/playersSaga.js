@@ -3,6 +3,7 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 
 import Api from '../Api'
 import { receivePlayers, playersFetchError, FETCH_PLAYERS_REQUEST } from './playersActions'
+import { logout } from '../user/userActions'
 
 function* fetchPlayers(action) {
   try {
@@ -19,6 +20,9 @@ function* fetchPlayers(action) {
       }),
     )
   } catch (e) {
+    if (e.response.status === 403) {
+      yield put(logout())
+    }
     yield put(playersFetchError(e))
   }
 }

@@ -72,23 +72,27 @@ const RenderPlayer = props => (
   </div>
 )
 
-const LinesContainer = props =>
-  props.lines && !props.fetching ? (
-    <div className="container">
-      <h1>Parhaat ketjut</h1>
-      <RenderLine line="y1" lines={props.lines} />
-      <RenderLine line="y2" lines={props.lines} />
-      <RenderLine line="y3" lines={props.lines} />
-      <RenderLine line="y4" lines={props.lines} />
-      <RenderLine line="j1" lines={props.lines} />
-      <RenderLine line="j2" lines={props.lines} />
-      <RenderLine line="j3" lines={props.lines} />
-      <RenderList name="Maalivahdit" lines={props.lines} type="goalies" />
-      <RenderList name="Myytävät" lines={props.lines} type="sell" />
-      <RenderList name="Ylimääräiset" lines={props.lines} type="extra" />
-      {!props.loggedIn && <Redirect to="/" />}
-    </div>
-  ) : null
+const LinesContainer = props => (
+  <div className="container">
+    {props.lines &&
+      !props.fetching && (
+        <div>
+          <h1>Parhaat ketjut</h1>
+          <RenderLine line="y1" lines={props.lines} />
+          <RenderLine line="y2" lines={props.lines} />
+          <RenderLine line="y3" lines={props.lines} />
+          <RenderLine line="y4" lines={props.lines} />
+          <RenderLine line="j1" lines={props.lines} />
+          <RenderLine line="j2" lines={props.lines} />
+          <RenderLine line="j3" lines={props.lines} />
+          <RenderList name="Maalivahdit" lines={props.lines} type="goalies" />
+          <RenderList name="Myytävät" lines={props.lines} type="sell" />
+          <RenderList name="Ylimääräiset" lines={props.lines} type="extra" />
+        </div>
+      )}
+    {!props.loggedIn && <Redirect to="/" />}
+  </div>
+)
 
 const mapStateToProps = state => ({
   lines: R.path(['lines', 'lines'], state),

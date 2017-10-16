@@ -36,51 +36,58 @@ const initialValues = player => ({
   loyalty: player.loyalty,
 })
 
-const PlayerContainer = props =>
-  props.player && !props.fetching ? (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-2">Nimi</div>
-        <div className="col-md-10">{props.player.name}</div>
-      </div>
-      <div className="row">
-        <div className="col-md-2">Ikä</div>
-        <div className="col-md-10">{props.player.age}</div>
-      </div>
-      <div className="row">
-        <div className="col-md-2">Lahjakkuus / Potentiaali</div>
-        <div className="col-md-10">
-          {props.player.quality} / {props.player.potential}
+const PlayerContainer = props => (
+  <div>
+    {props.player &&
+      !props.fetching && (
+        <div className="container">
+          <div className="row">
+            <div className="col-md-2">Nimi</div>
+            <div className="col-md-10">{props.player.name}</div>
+          </div>
+          <div className="row">
+            <div className="col-md-2">Ikä</div>
+            <div className="col-md-10">{props.player.age}</div>
+          </div>
+          <div className="row">
+            <div className="col-md-2">Lahjakkuus / Potentiaali</div>
+            <div className="col-md-10">
+              {props.player.quality} / {props.player.potential}
+            </div>
+          </div>
+          <UpdatePlayerForm
+            onSubmit={props.updatePlayer}
+            initialValues={initialValues(props.player)}
+          />
+          <table className="table table-condensed table-striped">
+            <thead>
+              <tr>
+                <th>Pvm</th>
+                <th>MV</th>
+                <th>Puo</th>
+                <th>Hyö</th>
+                <th>Lau</th>
+                <th>Syö</th>
+                <th>Nop</th>
+                <th>Voi</th>
+                <th>Ihi</th>
+                <th>Kun</th>
+                <th>Kok</th>
+                <th>TI</th>
+                <th>Viikot</th>
+                <th>Kasvunvara</th>
+                <th>Tehokkuus</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.player.data && props.player.data.map(d => <Data key={d.createdAt} data={d} />)}
+            </tbody>
+          </table>
+          {!props.loggedIn && <Redirect to="/" />}
         </div>
-      </div>
-      <UpdatePlayerForm onSubmit={props.updatePlayer} initialValues={initialValues(props.player)} />
-      <table className="table table-responsive table-borderless small">
-        <thead>
-          <tr>
-            <th>Pvm</th>
-            <th>MV</th>
-            <th>Puo</th>
-            <th>Hyö</th>
-            <th>Lau</th>
-            <th>Syö</th>
-            <th>Nop</th>
-            <th>Voi</th>
-            <th>Ihi</th>
-            <th>Kun</th>
-            <th>Kok</th>
-            <th>TI</th>
-            <th>Viikot</th>
-            <th>Kasvunvara</th>
-            <th>Tehokkuus</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.player.data && props.player.data.map(d => <Data key={d.createdAt} data={d} />)}
-        </tbody>
-      </table>
-      {!props.loggedIn && <Redirect to="/" />}
-    </div>
-  ) : null
+      )}
+  </div>
+)
 
 const mapStateToProps = state => ({
   player: R.path(['player', 'player'], state),

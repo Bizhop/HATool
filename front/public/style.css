@@ -8,3 +8,8 @@ table.custom-table {
 .smaller {
   font-size: 75%;
 }
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: lightgray;
+}

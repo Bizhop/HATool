@@ -19,12 +19,14 @@ public class AuthController extends BaseController {
 	AuthService authService;
 	
 	@RequestMapping(value = "/auth/me", method = RequestMethod.GET, produces="application/json")
-	public UserDto getUserInfo(HttpServletRequest request) throws Exception {
+	public UserDto getUserInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Person user = authService.getUser(request);
 		if(user == null) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			return null;
 		}
 		else {
+			response.setStatus(HttpServletResponse.SC_ACCEPTED);
 			return new UserDto(user.getEmail());
 		}
 	}

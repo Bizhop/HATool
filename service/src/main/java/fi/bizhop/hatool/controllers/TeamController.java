@@ -22,13 +22,20 @@ public class TeamController extends BaseController {
 	AuthService authService;
 	
 	@RequestMapping(value = "/team/best-lines", method = RequestMethod.GET, produces = "application/json")
-	public LinesDto getBestLines(HttpServletRequest request) throws Exception {
+	public LinesDto getBestLines(HttpServletRequest request, HttpServletResponse response) {
 		Person owner = authService.getUser(request);
-		return teamService.getBestLines(owner);
+		if(owner == null) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}
+		else {
+			response.setStatus(HttpServletResponse.SC_OK);
+			return teamService.getBestLines(owner);
+		}
 	}
 	
 	@RequestMapping(value = "/team/update-values", method = RequestMethod.GET)
-	public void updateValues(HttpServletResponse response) throws Exception {
+	public void updateValues(HttpServletResponse response) {
 		if(teamService.updateValues()) {
 			response.setStatus(HttpServletResponse.SC_OK);
     	}

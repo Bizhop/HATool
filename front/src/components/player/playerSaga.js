@@ -7,6 +7,7 @@ import {
   FETCH_PLAYER_REQUEST,
   UPDATE_PLAYER_REQUEST,
 } from './playerActions'
+import { logout } from '../user/userActions'
 
 function* fetchPlayer(action) {
   try {
@@ -15,6 +16,9 @@ function* fetchPlayer(action) {
     })
     yield put(receivePlayer(player))
   } catch (e) {
+    if (e.response.status === 403) {
+      yield put(logout())
+    }
     yield put(playerFetchError(e))
   }
 }
@@ -24,6 +28,9 @@ function* updatePlayer(action) {
     const player = yield call(Api.put, `api/players/${action.params.id}`, action.params)
     yield put(receivePlayer(player))
   } catch (e) {
+    if (e.response.status === 403) {
+      yield put(logout())
+    }
     yield put(playerFetchError(e))
   }
 }

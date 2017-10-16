@@ -78,7 +78,7 @@ public class PlayerService {
 			}
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 			return false;
 		}
 	}

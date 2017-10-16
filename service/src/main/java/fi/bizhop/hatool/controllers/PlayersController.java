@@ -35,7 +35,7 @@ public class PlayersController extends BaseController {
 	AuthService authService;
 
 	@RequestMapping(value = "/players", method = RequestMethod.GET, produces = "application/json")
-	public Page<PlayerListingProjection> getPlayers(Pageable pageable, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Page<PlayerListingProjection> getPlayers(Pageable pageable, HttpServletRequest request, HttpServletResponse response) {
 		Person owner = authService.getUser(request);
 		if(owner == null) {
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -48,15 +48,29 @@ public class PlayersController extends BaseController {
 	}
 
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.GET, produces = "application/json")
-	public PlayerDetailsProjection getPlayer(@PathVariable Integer id, HttpServletRequest request) throws Exception {
+	public PlayerDetailsProjection getPlayer(@PathVariable Integer id, HttpServletRequest request, HttpServletResponse response) {
 		Person owner = authService.getUser(request);
-		return playerService.getPlayer(owner, id);
+		if(owner == null) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}
+		else {
+			response.setStatus(HttpServletResponse.SC_OK);
+			return playerService.getPlayer(owner, id);
+		}
 	}
 
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.PUT, consumes = "application/json")
-	public PlayerDetailsProjection updatePlayer(@PathVariable Integer id, @RequestBody UpdatePlayerDto dto, HttpServletRequest request) throws Exception {
+	public PlayerDetailsProjection updatePlayer(@PathVariable Integer id, @RequestBody UpdatePlayerDto dto, HttpServletRequest request, HttpServletResponse response) {
 		Person owner = authService.getUser(request);
-		return playerService.updatePlayer(owner, id, dto);
+		if(owner == null) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}
+		else {
+			response.setStatus(HttpServletResponse.SC_OK);
+			return playerService.updatePlayer(owner, id, dto);
+		}
 	}
 
 	@RequestMapping(value = "/players/import", method = RequestMethod.PUT, consumes = "application/json")

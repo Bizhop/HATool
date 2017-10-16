@@ -14,9 +14,15 @@ public class AuthService {
 	@Autowired
 	PersonRepository personRepo;
 	
-	public Person getUser(HttpServletRequest request) throws Exception {
-		String userEmail = TokenAuthentication.getUserEmail(request);
-		return personRepo.findByEmail(userEmail);
+	public Person getUser(HttpServletRequest request) {
+		try {
+			String userEmail = TokenAuthentication.getUserEmail(request);
+			return personRepo.findByEmail(userEmail);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 	public Person login(HttpServletRequest request) throws Exception {
