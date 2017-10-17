@@ -7,6 +7,7 @@ import PlayerContainer from './player/PlayerContainer'
 import ImportContainer from './import/ImportContainer'
 import DashContainer from './dash/DashContainer'
 import LinesContainer from './lines/LinesContainer'
+import ChartContainer from './chart/ChartContainer'
 
 const NotFound = () => (
   <div className="container">
@@ -24,6 +25,7 @@ const Routes = () => (
       <Route exact path="/players/:id" component={PlayerContainer} />
       <Route exact path="/import" component={ImportContainer} />
       <Route exact path="/lines" component={LinesContainer} />
+      <Route exact path="/chart" component={ChartContainer} />
       <Route component={NotFound} />
     </Switch>
   </div>
