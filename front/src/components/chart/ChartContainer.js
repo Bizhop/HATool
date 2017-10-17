@@ -1,5 +1,5 @@
 import React from 'react'
-import { LineChart, Line, XAxis, YAxis } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts'
 import R from 'ramda'
 
 const data = [
@@ -141,13 +141,28 @@ const data = [
   },
 ]
 
+const CustomLabel = props => {
+  const { x, y, stroke, value } = props
+  return (
+    <text x={x} y={y} dy={-4} fill={stroke} fontSize={10} textAnchor="middle">
+      {value}
+    </text>
+  )
+}
+
 const ChartContainer = () => (
   <div>
     <h1>Käppyrät</h1>
-    <LineChart width={600} height={300} data={R.sortBy(R.prop('createdAt'), data)}>
+    <LineChart width={1024} height={600} data={R.sortBy(R.prop('createdAt'), data)}>
       <XAxis dataKey="createdAt" />
       <YAxis />
-      <Line type="monotone" dataKey="abilityIndex" />
+      <CartesianGrid strokeDasharray="3 3" />
+      <Line
+        type="monotone"
+        dataKey="abilityIndex"
+        label={<CustomLabel />}
+        isAnimationActive={false}
+      />
     </LineChart>
   </div>
 )
