@@ -1,170 +1,89 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts'
 import R from 'ramda'
+import { Redirect } from 'react-router-dom'
 
-const data = [
-  {
-    abilityIndex: 165,
-    attack: 0,
-    createdAt: '17.10.2017',
-    defence: 56,
-    efficiency: 174,
-    experience: 19,
-    form: 0,
-    goalie: 0,
-    growthPotential: 5850,
-    passing: 37,
-    selfControl: 20,
-    shooting: 0,
-    speed: 1,
-    strength: 51,
-    weeks: 32,
-  },
-  {
-    abilityIndex: 165,
-    attack: 0,
-    createdAt: '16.10.2017',
-    defence: 56,
-    efficiency: 174,
-    experience: 19,
-    form: 0,
-    goalie: 0,
-    growthPotential: 5850,
-    passing: 37,
-    selfControl: 20,
-    shooting: 0,
-    speed: 1,
-    strength: 51,
-    weeks: 32,
-  },
-  {
-    abilityIndex: 164,
-    attack: 0,
-    createdAt: '15.10.2017',
-    defence: 55,
-    efficiency: 173,
-    experience: 19,
-    form: 0,
-    goalie: 0,
-    growthPotential: 5850,
-    passing: 37,
-    selfControl: 20,
-    shooting: 0,
-    speed: 1,
-    strength: 51,
-    weeks: 32,
-  },
-  {
-    abilityIndex: 164,
-    attack: 0,
-    createdAt: '13.10.2017',
-    defence: 55,
-    efficiency: 173,
-    experience: 19,
-    form: 0,
-    goalie: 0,
-    growthPotential: 5850,
-    passing: 37,
-    selfControl: 20,
-    shooting: 0,
-    speed: 1,
-    strength: 51,
-    weeks: 31,
-  },
-  {
-    abilityIndex: 163,
-    attack: 0,
-    createdAt: '12.10.2017',
-    defence: 54,
-    efficiency: 172,
-    experience: 19,
-    form: 0,
-    goalie: 0,
-    growthPotential: 5850,
-    passing: 37,
-    selfControl: 20,
-    shooting: 0,
-    speed: 1,
-    strength: 51,
-    weeks: 31,
-  },
-  {
-    abilityIndex: 163,
-    attack: 0,
-    createdAt: '11.10.2017',
-    defence: 54,
-    efficiency: 172,
-    experience: 18,
-    form: 0,
-    goalie: 0,
-    growthPotential: 5850,
-    passing: 37,
-    selfControl: 20,
-    shooting: 0,
-    speed: 1,
-    strength: 51,
-    weeks: 31,
-  },
-  {
-    abilityIndex: 162,
-    attack: 0,
-    createdAt: '09.10.2017',
-    defence: 53,
-    efficiency: 171,
-    experience: 18,
-    form: 0,
-    goalie: 0,
-    growthPotential: 5850,
-    passing: 37,
-    selfControl: 20,
-    shooting: 0,
-    speed: 1,
-    strength: 51,
-    weeks: 31,
-  },
-  {
-    abilityIndex: 160,
-    attack: 0,
-    createdAt: '06.10.2017',
-    defence: 52,
-    efficiency: 169,
-    experience: 18,
-    form: 0,
-    goalie: 0,
-    growthPotential: 5850,
-    passing: 36,
-    selfControl: 20,
-    shooting: 0,
-    speed: 1,
-    strength: 51,
-    weeks: 30,
-  },
-]
+import { fetchPlayer } from '../player/playerActions'
+import { fetchPlayers } from '../players/playersActions'
+import { toggleFilter } from './chartActions'
+import SelectPlayerForm from './SelectPlayerForm'
 
-const CustomLabel = props => {
-  const { x, y, stroke, value } = props
-  return (
-    <text x={x} y={y} dy={-4} fill={stroke} fontSize={10} textAnchor="middle">
-      {value}
-    </text>
-  )
-}
+const CustomLabel = ({ x, y, stroke, value }) => (
+  <text x={x} y={y} dy={-5} dx={-12} fill={stroke} fontSize={10} textAnchor="middle">
+    {value}
+  </text>
+)
 
-const ChartContainer = () => (
-  <div>
-    <h1>Käppyrät</h1>
-    <LineChart width={1024} height={600} data={R.sortBy(R.prop('createdAt'), data)}>
-      <XAxis dataKey="createdAt" />
-      <YAxis />
-      <CartesianGrid strokeDasharray="3 3" />
-      <Line
-        type="monotone"
-        dataKey="abilityIndex"
-        label={<CustomLabel />}
-        isAnimationActive={false}
-      />
-    </LineChart>
+const RenderCheckboxes = props => (
+  <div className="row">
+    {props.checkboxes &&
+      props.checkboxes.map(c => (
+        <RenderCheckbox key={c} name={c} toggleFilter={props.toggleFilter} />
+      ))}
   </div>
 )
 
-export default ChartContainer
+const RenderCheckbox = props => (
+  <div className="col-md-1">
+    {props.name}
+    <input type="checkbox" onChange={() => props.toggleFilter(props.name)} />
+  </div>
+)
+
+const ChartContainer = props => (
+  <div className="container">
+    <SelectPlayerForm players={props.players} fetchPlayer={props.fetchPlayer} />
+    <RenderCheckboxes
+      filters={props.filters}
+      checkboxes={props.checkboxes}
+      toggleFilter={props.toggleFilter}
+    />
+    {props.player && (
+      <div>
+        <h1>{props.player.name} (TI)</h1>
+        <LineChart
+          width={1024}
+          height={600}
+          data={R.sortBy(R.prop('createdAt'), props.player.data)}
+        >
+          <XAxis dataKey="createdAt" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          {props.filters &&
+            props.filters.map(f => (
+              <Line
+                key={f}
+                type="monotone"
+                dataKey={f}
+                label={<CustomLabel />}
+                isAnimationActive={false}
+              />
+            ))}
+        </LineChart>
+      </div>
+    )}
+    {!props.loggedIn && <Redirect to="/" />}
+  </div>
+)
+
+const mapStateToProps = state => ({
+  player: R.path(['player', 'player'], state),
+  players: R.pathOr([], ['players', 'players'], state),
+  loggedIn: R.path(['user', 'token'], state),
+  filters: R.path(['chart', 'filters'], state),
+  checkboxes: R.path(['chart', 'checkboxes'], state),
+})
+
+const mapDispatchToProps = dispatch => ({
+  getPlayers: dispatch(
+    fetchPlayers({
+      sort: 'name,asc',
+      newSortColumn: 'name',
+    }),
+  ),
+  fetchPlayer: id => dispatch(fetchPlayer(id)),
+  toggleFilter: name => dispatch(toggleFilter(name)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChartContainer)

@@ -6,6 +6,7 @@ import playerReducer from './components/player/playerReducer'
 import importReducer from './components/import/importReducer'
 import linesReducer from './components/lines/linesReducer'
 import userReducer from './components/user/userReducer'
+import chartReducer from './components/chart/chartReducer'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   import: importReducer,
   lines: linesReducer,
   user: userReducer,
+  chart: chartReducer,
 })
 
 export default rootReducer

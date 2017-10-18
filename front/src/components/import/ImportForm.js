@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import { RenderTextInput } from '../shared/FormInput'
 
-const importForm = props => (
+const ImportForm = props => (
   <form onSubmit={props.handleSubmit}>
     <div className="row">
       <div className="col-md-12">
@@ -16,4 +16,4 @@ const importForm = props => (
   </form>
 )
 
-export default reduxForm({ form: 'importForm' })(importForm)
+export default reduxForm({ form: 'importForm' })(ImportForm)

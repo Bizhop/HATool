@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import R from 'ramda'
-import { Redirect } from 'react-router-dom'
 
 import ImportForm from './ImportForm'
 import { importPlayers } from './importActions'
@@ -11,7 +10,6 @@ const ImportContainer = props => (
     <h1>Tuonti</h1>
     <ImportForm onSubmit={props.sendCookie} />
     {props.text && <h4>{props.text}</h4>}
-    {!props.loggedIn && <Redirect to="/" />}
   </div>
 )
 

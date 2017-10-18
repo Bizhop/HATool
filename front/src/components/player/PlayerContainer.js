@@ -29,13 +29,6 @@ const Data = props => {
   )
 }
 
-const initialValues = player => ({
-  id: player.id,
-  position: player.position,
-  status: player.status,
-  loyalty: player.loyalty,
-})
-
 const PlayerContainer = props => (
   <div>
     {props.player &&
@@ -57,7 +50,7 @@ const PlayerContainer = props => (
           </div>
           <UpdatePlayerForm
             onSubmit={props.updatePlayer}
-            initialValues={initialValues(props.player)}
+            initialValues={R.pick(['id', 'position', 'status', 'loyalty'], props.player)}
           />
           <table className="table table-condensed table-striped">
             <thead>

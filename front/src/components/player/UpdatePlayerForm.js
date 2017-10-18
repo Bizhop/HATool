@@ -22,7 +22,7 @@ const statusList = [
   { name: 'NEW', value: 'NEW' },
 ]
 
-const updatePlayerForm = props => (
+const UpdatePlayerForm = props => (
   <form onSubmit={props.handleSubmit}>
     <div className="row">
       <div className="col-md-2">
@@ -57,4 +57,4 @@ const updatePlayerForm = props => (
   </form>
 )
 
-export default reduxForm({ form: 'updatePlayerForm' })(updatePlayerForm)
+export default reduxForm({ form: 'updatePlayerForm' })(UpdatePlayerForm)
