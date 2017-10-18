@@ -17,18 +17,30 @@ const CustomLabel = ({ x, y, stroke, value }) => (
 
 const RenderCheckboxes = props => (
   <div className="row">
-    {props.checkboxes &&
-      props.checkboxes.map(c => (
-        <RenderCheckbox key={c} name={c} toggleFilter={props.toggleFilter} />
-      ))}
+    <div className="col-md-12">
+      {props.checkboxes &&
+        props.checkboxes.map(c => (
+          <RenderCheckbox
+            key={c}
+            name={c}
+            toggleFilter={props.toggleFilter}
+            filters={props.filters}
+          />
+        ))}
+    </div>
   </div>
 )
 
 const RenderCheckbox = props => (
-  <div className="col-md-1">
+  <label className="checkbox-inline smaller" htmlFor={props.name}>
+    <input
+      name={props.name}
+      type="checkbox"
+      onChange={() => props.toggleFilter(props.name)}
+      checked={R.contains(props.name, props.filters)}
+    />{' '}
     {props.name}
-    <input type="checkbox" onChange={() => props.toggleFilter(props.name)} />
-  </div>
+  </label>
 )
 
 const ChartContainer = props => (
@@ -41,7 +53,7 @@ const ChartContainer = props => (
     />
     {props.player && (
       <div>
-        <h1>{props.player.name} (TI)</h1>
+        <h1>{props.player.name}</h1>
         <LineChart
           width={1024}
           height={600}
