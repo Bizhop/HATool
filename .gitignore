@@ -1,8 +1,7 @@
 /target/
-.project
-.classpath
-.settings/
+*.sql
+*.http
+*.dump
 *.properties
 *.temp
-*.dump
-*.sh
+.settings/
