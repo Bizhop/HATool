@@ -1,7 +1,7 @@
 # HATool
 
 ## Tietokannan luonti:
-* aja komento `psql postgres -a -U postgres -f service/src/main/sql/create_database.sql`
+* aja komento `psql postgres -a -U postgres -f src/main/sql/create_database.sql`
 
 ## Tietokannan hallinta:
 * taulujen poisto `psql -U hatool -W -d hatool -a -f src/main/sql/drop_tables.sql`
