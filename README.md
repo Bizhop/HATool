@@ -1,7 +1,6 @@
 # HATool
 
 ## Tietokannan luonti:
-* Kopioi service/src/main/sql/create_database.sql.template ilman .template päätettä ja muokkaa tiedostoon halutessasi kannan nimi, käyttäjätunnus ja salasana
 * aja komento `psql postgres -a -U postgres -f service/src/main/sql/create_database.sql`
 
 ## Tietokannan hallinta:
